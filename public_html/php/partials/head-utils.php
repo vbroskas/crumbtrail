@@ -34,7 +34,7 @@
 
 
 		<!--Google Maps API-->
-		<script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+		<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB2EN5QboPZvyqatHPmQYGhGHFlhRLIDmU"></script>
 
 
 		<!-- Angular -->

@@ -1,3 +1,12 @@
+<?php
+// start session and enable XSRF protection
+require_once(dirname(__DIR__) . "/lib/xsrf.php");
+if(session_status() !== PHP_SESSION_ACTIVE) {
+	session_start();
+}
+setXsrfCookie();
+?>
+
 <!DOCTYPE html>
 <html lang="en" ng-app="Crumbtrail">
 	<head>

@@ -35,7 +35,7 @@ try {
 	$eventStart = filter_input(INPUT_GET, "eventStart", FILTER_VALIDATE_INT);
 	$eventEnd = filter_input(INPUT_GET, "eventEnd", FILTER_VALIDATE_INT);
 	$eventLocationLat = filter_input(INPUT_GET, "eventLocationLat", FILTER_VALIDATE_FLOAT);
-	$eventLocationLng = filter_input(INPUT_GET, "eventLocationLng", FILTER_VALIDATE_FLOAT);
+	$eventLocationLong = filter_input(INPUT_GET, "eventLocationLong", FILTER_VALIDATE_FLOAT);
 	$companyId = filter_input(INPUT_GET, "companyId", FILTER_VALIDATE_INT);
 	//make sure the id is valid for methods that require it
 	if(($method === "PUT") && (empty($id) === true || $id < 0)) {
@@ -84,7 +84,7 @@ try {
 		}
 		//make sure event location is available
 		//since all are used to find a location should all be used to ensure that a location is available??
-		//location lat and long?? explanation...Angular will be aware of location, angular's representation will be different...Angular will have an object with two state variables 0) sate variable :lat (latitude) 1) lng (longitude) fixed on lines below....yay
+		//location lat and long?? explanation...Angular will be aware of location, angular's representation will be different...Angular will have an object with two state variables 0) sate variable :lat (latitude) 1) long (longitude) fixed on lines below....yay
 		//todo commented out lines 110-123
 		//angular event end and start.....milliseconds since the beginning of time.... 01, 01, 1970 12:00am UTC
 		$ngEventEnd = filter_var($requestObject->eventEnd, FILTER_VALIDATE_INT);
@@ -99,7 +99,7 @@ try {
 				throw (new RuntimeException("Event does not exist.", 404));
 			}
 			//put new event content into the event and update
-			//$point = new Point($requestObject->location->lat, $requestObject->location->lng);//
+			//$point = new Point($requestObject->location->lat, $requestObject->location->long);//
 			//$event->setEventLocation($point);
 			//$event->setEventStart($requestObject->eventStart);
 			$event->setEventEnd($eventEnd);
@@ -128,7 +128,7 @@ try {
 
 			//because this is how angular will send the associate array.......null given->consistency
 			$reply->start = $eventStart;
-			$point = new Point($requestObject->eventLocation->lat, $requestObject->eventLocation->lng);
+			$point = new Point($requestObject->eventLocation->lat, $requestObject->eventLocation->long);
 			$event = new Event(null, $requestObject ->eventTruckId, $eventEnd, $point, $eventStart);
 			$event->insert($pdo);;
 			//update reply
